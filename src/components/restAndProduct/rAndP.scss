@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
+.restaurant{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    font-family: 'Roboto', sans-serif;
+    gap: 20px;
+    .logo{
+        width: 50px;
+    }
+    &__info{
+        display: flex;
+        gap: 20px;
+    }
+    &__buttons{
+        display: flex;
+        gap: 20px;
+        button{
+            width: 100px;
+            height: 40px;
+            background-color: #F2F2F2;
+            border: none;
+            border-radius: 10px;
+            &:hover{
+                cursor: pointer;
+                background-color: #FFE031;
+            }
+        }
+    }
+    &__menu{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    &__food{
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        background-color: #F2F2F2;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+.details{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 10px;
+    font-family: 'Roboto', sans-serif;
+    img{
+        width: 300px;
+    }
+    &__ingredientes{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    &__buttons{
+        display: flex;
+        gap: 20px;
+        button{
+            width: 20px;
+            border: none;
+            background-color: #F2F2F2;
+            &:hover{
+                cursor: pointer;
+                background-color: #FFE031;
+            }
+        }
+    }
+    &__cantidad{
+        display: flex;
+        gap: 20px;
+        .counter{
+            display: flex;
+            gap: 10px;
+            background-color: #F2F2F2;
+            align-items: center;
+            height: 30px;
+            border-radius: 10px;
+            button{
+                width: 20px;
+                height: 20px;
+                border: none;
+            }
+        }
+        .price{
+            display: flex;
+            gap: 40px;
+            height: 30px;
+            border-radius: 10px;
+            background-color: #FFE031;
+            align-items: center;
+            width: 150px;
+        }
+    }
+}

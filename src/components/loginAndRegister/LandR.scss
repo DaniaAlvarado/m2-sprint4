@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    gap: 200px;
+    div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        input{
+            width: 250px;
+            border: none;
+        }
+        label{
+            display: flex;
+            gap: 20px;
+        }
+        hr{
+            width: 30%;
+            background-color: #FFE031;
+        }
+    }
+    button{
+        width: 200px;
+        height: 40px;
+        background-color: #FFE031;
+        border: none;
+        border-radius: 10px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width:875px) {
+    .main{
+        div{
+            h2{
+                text-align: left;
+            }
+            input{
+                width: 100%;
+            }
+            label{
+                display: flex;
+                flex-direction: column;
+                input{
+                    width: 100%;
+                }
+            }
+        }
+        button{
+            width: 100%;
+        }
+    }
+}

@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
+.home{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    font-family: 'Roboto', sans-serif;
+    gap: 15px;
+    .ubication{
+        display: flex;
+        gap: 10px;
+        .deliver{
+            color: #FFE031;
+        }
+    }
+    section{
+        display: flex;
+        gap: 20px;
+    }
+    .buttons{
+        display: flex;
+        gap: 15px;
+        button{
+            width: 100px;
+            height: 40px;
+            background-color: #F2F2F2;
+            border: none;
+            border-radius: 10px;
+            &:hover{
+                cursor: pointer;
+                background-color: #FFE031;
+            }
+        }
+    }
+    .restaurant{
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 20px;
+        aside{
+            display: flex;
+            width: 500px;
+            height: 150px;
+            gap: 20px;
+            background-color: rgb(193, 193, 236);
+            .image{
+                width: 150px;
+                height: 150px;
+                background-color: #FFE031;
+            }
+            .info{
+                display: flex;
+                flex-direction: column;
+                margin-top: 15px;
+                gap: 5px;
+            }
+        }
+    }
+}
+// clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
+
+@media (max-width:875px) {
+    .home{
+        .restaurant{
+            aside{
+                width: 90%;
+            }
+        }
+    }
+}

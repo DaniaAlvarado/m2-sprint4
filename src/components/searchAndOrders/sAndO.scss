@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
+.search{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    font-family: 'Roboto', sans-serif;
+    gap: 400px;
+    &__container{
+        display: flex;
+        gap: 20px;
+        width: 90%;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__input{
+        display: flex;
+        gap: 10px;
+        background-color: #F2F2F2;
+        width: 400px;
+        height: 50px;
+        border-radius: 10px;
+        img{
+            margin: 10px;
+            width: 30px;
+            height: 30px;
+        }
+        input{
+            border: none;
+            background-color: #F2F2F2;
+            width: 80%;
+        }
+    }
+    &__historial{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        div{
+            color: #A7A7A7;
+        }
+    }
+}
+
+.orders{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+    gap: 300px;
+    &__historial{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        span{
+            text-align: center;
+        }
+    }
+    &__restaurat{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        aside{
+            display: flex;
+            justify-content: space-between;
+            div{
+                display: flex;
+                gap: 20px;
+            }
+            span{
+                color: #77DF52;
+            }
+        }
+    }
+}
+
+@media (max-width:875px){
+    .search{
+        &__input{
+            width: 95%;
+        }
+    }
+}
