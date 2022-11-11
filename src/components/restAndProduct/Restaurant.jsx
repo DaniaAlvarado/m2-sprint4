@@ -1,6 +1,7 @@
 import React from 'react';
 import img from '../img/Mask group (1).png';
 import restaurant from '../img/Mask group.png';
+import restaurant2 from '../img/foodImg.jpg';
 import star from '../img/Star 4.png';
 import food from '../img/Mask group (2).png';
 import './rAndP.scss'
@@ -11,7 +12,7 @@ const Restaurant = () => {
             <img className='logo' src={img} alt="img" />
             <article className='restaurant__info'>
                 <figure >
-                    <img src={restaurant} alt="restaurant" />
+                    <img src={restaurant2} alt="restaurant" />
                 </figure>
                 <nav className='info'>
                     <span>Pardes Restaurant</span>

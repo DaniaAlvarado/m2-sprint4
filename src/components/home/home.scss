@@ -18,6 +18,10 @@
     section{
         display: flex;
         gap: 20px;
+        img{
+            width: 200px;
+            height: 80px;
+        }
     }
     .buttons{
         display: flex;
@@ -41,14 +45,17 @@
         gap: 20px;
         aside{
             display: flex;
-            width: 500px;
+            width: 400px;
             height: 150px;
             gap: 20px;
             background-color: rgb(193, 193, 236);
             .image{
-                width: 150px;
-                height: 150px;
-                background-color: #FFE031;
+                img{
+                    width: 150px;
+                    height: 130px;
+                    clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
+                    border-radius: 10px;
+                }
             }
             .info{
                 display: flex;

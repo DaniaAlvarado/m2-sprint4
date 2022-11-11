@@ -13,6 +13,7 @@
     padding: 20px;
     font-family: 'Roboto', sans-serif;
     gap: 200px;
+    justify-content: space-between;
     div{
         display: flex;
         flex-direction: column;
@@ -21,13 +22,14 @@
         input{
             width: 250px;
             border: none;
+            outline: none;
         }
         label{
             display: flex;
             gap: 20px;
         }
         hr{
-            width: 30%;
+            width: 100%;
             background-color: #FFE031;
         }
     }
