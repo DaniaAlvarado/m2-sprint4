@@ -1,8 +1,8 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,
-    updateProfile, } from "firebase/auth";
+    updateProfile, signInWithPopup} from "firebase/auth";
 import { auth } from "../../firebase/firebaseConfi";
-  //import { auth } from "../../Firebase/firebaseConfig";
   import { userTypes } from "../types/userTypes";
+  //import { google } from "../../firebase/firebaseConfi";
   
   export const actionRegisterAsync = ({ email, password, name, avatar }) => {
     return (dispatch) => {
@@ -71,7 +71,7 @@ import { auth } from "../../firebase/firebaseConfi";
     };
   };
   
-  const actionLoginSync = (user) => {
+  export const actionLoginSync = (user) => {
     return {
       type: userTypes.LOGIN_USER,
       payload: {
@@ -79,6 +79,34 @@ import { auth } from "../../firebase/firebaseConfi";
       },
     };
   };
+
+  export const loginProviderAsync = (provider) => {
+    return (dispatch) => {
+        signInWithPopup(auth, provider)
+        .then((result) =>{
+            //const user = result.user;
+            const {displayName, accessToken, photoURL, phoneNumber, email} = result.user;
+            console.log(result.user);
+            dispatch(actionLoginSync({
+                email,
+                name: displayName,
+                accessToken,
+                avatar: photoURL,
+                phoneNumber,
+                error: false
+            }))
+        })
+        .catch((error) =>{
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const email = error.customData.email;
+            console.log(error);
+            console.log(errorCode);
+            console.log(errorMessage);
+            dispatch(actionLoginSync({ email, error: true, errorMessage }))
+        })
+    }
+}
   
   export const actionLogoutAsync = () => {
     return (dispatch) => {

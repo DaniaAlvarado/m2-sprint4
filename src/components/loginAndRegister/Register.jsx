@@ -83,6 +83,7 @@ const Register = () => {
                         <input type="password" {...register("password")} />
                         {errors.password?.message}
                     </label>
+                    <hr />
                     <label>
                          REPEAT PASSWORD
                         <input type="password" {...register("repeatPassword")} />

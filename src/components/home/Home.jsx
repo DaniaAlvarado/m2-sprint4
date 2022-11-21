@@ -4,52 +4,39 @@ import promo from '../img/Promo 1.png';
 import promo2 from '../img/Promo 2 (1).png';
 import promo3 from '../img/sopas-gourmet.jpg';
 import food from '../img/image 4.png';
-import restaurant2 from '../img/foodImg.jpg';
-import restaurant from '../img/Mask group.png';
+//import restaurant2 from '../img/foodImg.jpg';
+//import restaurant from '../img/Mask group.png';   import Carousel from "react-bootstrap/Carousel";
 import star from '../img/Star 4.png';
 import './home.scss';
 import Footer from '../footer/Footer';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+//import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionLogoutAsync } from '../../redux/actions/userAction';
+import { actionFilterRestaurantAsync, actionGetRestaurantAsync } from '../../redux/actions/restaurantAction';
+import { category } from '../../services/data';
+import { useNavigate } from 'react-router-dom';
 
-const Home = ({ isAutentication }) => {
+const Home = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     //const { photoURL } = useSelector(store => store.user)
     const onCloseSession = () => {
         dispatch(actionLogoutAsync());
     };
-    // const navigate = useNavigate()
-    // const hola = () => {
-    //     console.log('hi');
-    // }
 
-    // const initial = 0
-    // const [index, setIndex] = useState(initial)
-    // const nextImg = () => {
-    //     setIndex(index + 1)
-    //     console.log(index);
-    // }
-    // const [render, setRender] = useState(promo)
-    // useEffect(() => {
-    //     if (index === 0) {
-    //         setRender(promo)
-    //     }
-    //     else if (index === 1) {
-    //         setRender(promo2)
+    const { restaurant } = useSelector(store => store.restaurantStore);
 
-    //     }
-    //     else if (index === 2) {
-    //         setRender(promo3)
+    useEffect(() => {
+        dispatch(actionGetRestaurantAsync());
+    }, [dispatch])
 
-    //     }
-    //     else if (index === 3) {
-    //         navigate('/home')
+    const onFiltered = (searchValue) => {
+        const searchParam = "category";
+        dispatch(actionFilterRestaurantAsync(searchParam, searchValue));
+    };
 
-    //     }
-
-    // }, [index])
 
     return (
         <div className='home'>
@@ -61,65 +48,60 @@ const Home = ({ isAutentication }) => {
                     <aside className='deliver'>DELIVER TO</aside>
                     <aside>882 Well St, New-York</aside>
                 </div>
-                <button onClick={onCloseSession}>cerrar sesion</button>
+                <button onClick={onCloseSession}>log out</button>
             </nav>
             <section>
                 <img src={promo} alt="promo" />
                 <img src={promo2} alt="promo2" />
-                <img src={promo3} alt="promo2" />
+                <img src='https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQRgBoWGw5JvdDBsoZEB6dWVVUegC2yv_XuCRGZiMOFoHUCyj_J' alt="promo2" />
             </section>
             <span>Restaurants and cafes</span>
             <aside className='buttons'>
-                <button>All</button>
-                <button><img src={food} alt="hamburger" />Fast food</button>
-                <button><img src={food} alt="hamburger" />Pizza</button>
+                <button onClick={() => { dispatch(actionGetRestaurantAsync()) }}>All</button>
+                {category.map((item) => (
+                    <button key={item.value} onClick={() => { onFiltered(item.label); }}><img src={food} alt="hamburger" />{item.label}</button>
+                ))
+                }
             </aside>
             <article className='restaurant'>
-                <aside>
-                    <figure className='image'>
-                        <img src={restaurant2} alt="restaurant" />
-                    </figure>
-                    <nav className='info'>
-                        <span>Pardes Restaurant</span>
-                        <figure>
-                            <img src={star} alt="star" />
-                            <img src={star} alt="star" />
-                            <img src={star} alt="star" />
-                        </figure>
-                        <span>Work time 09:30 - 23:00</span>
-                        <div>Before you 4$</div>
-                    </nav>
-                </aside>
-                <aside>
-                    <figure className='image'>
-                        <img src={restaurant2} alt="restaurant" />
-                    </figure>
-                    <nav className='info'>
-                        <span>Pardes Restaurant</span>
-                        <figure>
-                            <img src={star} alt="star" />
-                            <img src={star} alt="star" />
-                            <img src={star} alt="star" />
-                        </figure>
-                        <span>Work time 09:30 - 23:00</span>
-                        <div>Before you 4$</div>
-                    </nav>
-                </aside>
-                <aside>
-                    <figure className='image'>
-                        <img src={restaurant2} alt="restaurant" />
-                    </figure>
-                    <nav className='info'>
-                        <span>Pardes Restaurant</span>
-                        <figure>
-                            <img src={star} alt="star" />
-                            <img src={star} alt="star" />
-                            <img src={star} alt="star" />
-                        </figure>
-                        <span>Work time 09:30 - 23:00</span>
-                        <div>Before you 4$</div>
-                    </nav>
-                </aside>
+                {restaurant && restaurant.length ? (
+                    restaurant.map((restaurant, index) => (
+                        <aside key={index} onClick={() => { navigate(`/restaurant/${restaurant.id}`) }}>
+                            <figure className='image'>
+                                <img src={restaurant.image} alt="restaurant" />
+                            </figure>
+                            <nav className='info'>
+                                <span>{restaurant.name}</span>
+                                <figure>
+                                    <img src={star} alt="star" />
+                                    <img src={star} alt="star" />
+                                    <img src={star} alt="star" />
+                                </figure>
+                                <span>Work time {restaurant.time}</span>
+                                <div>Before you {restaurant.before}</div>
+                            </nav>
+                        </aside>
+                    ))
+                ) : (
+                    <></>
+                )}
+
+                {/* <Carousel>
+                    <Carousel.Item>
+                        <img
+                            className="imgCarrusel d-block w-100"
+                            src="https://www.easypromosapp.com/blog/wp-content/uploads/header_ideas_de_promociones_para_restaurantes.jpg"
+                            alt="promo"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="imgCarrusel d-block w-100"
+                            src="https://www.easypromosapp.com/blog/wp-content/uploads/header_ideas_de_promociones_para_restaurantes.jpg"
+                            alt="promo"
+                        />
+                    </Carousel.Item>
+                </Carousel> */}
             </article>
             <Footer />
         </div>

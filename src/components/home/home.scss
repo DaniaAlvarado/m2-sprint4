@@ -18,9 +18,12 @@
     section{
         display: flex;
         gap: 20px;
+        width: 98%;
+        overflow-x: scroll;
         img{
             width: 200px;
             height: 80px;
+            border-radius: 10px;
         }
     }
     .buttons{
@@ -41,14 +44,14 @@
     .restaurant{
         display: flex;
         width: 100%;
-        flex-wrap: wrap;
-        gap: 20px;
+        height: 380px;
+        overflow: scroll;
+        gap: 15px;
         aside{
             display: flex;
-            width: 400px;
+            width: 45%;
             height: 150px;
             gap: 20px;
-            background-color: rgb(193, 193, 236);
             .image{
                 img{
                     width: 150px;
