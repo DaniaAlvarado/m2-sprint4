@@ -55,6 +55,10 @@
         background-color: #F2F2F2;
         gap: 10px;
         text-align: center;
+        img{
+            width: 100%;
+            height: 150px
+        }
     }
 }
 
@@ -66,7 +70,8 @@
     gap: 10px;
     font-family: 'Roboto', sans-serif;
     img{
-        width: 300px;
+        width: 400px;
+        height: 350px;border-radius: 10px;
     }
     &__ingredientes{
         display: flex;

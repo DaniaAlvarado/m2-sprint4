@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import search from '../img/Svg (2).png';
 import back from '../img/Group 48.png';
 import Footer from '../footer/Footer';
@@ -6,24 +6,24 @@ import './sAndO.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { actionFilterAsync } from '../../redux/actions/restaurantAction';
+import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
+    const navigate = useNavigate();
 
     const { food } = useSelector(store => store.foodStore);
     const dispatch = useDispatch();
-    const [searc, setSearc] = useState(false);
     const {register, handleSubmit} = useForm();
 
-    const onSearch = (data, e) => {
-        setSearc(e.target.value);
+    useEffect(() =>{
+        dispatch(actionFilterAsync())
+    }, [dispatch])
+
+    const onSearch = (data) => {
         const searchParam = data.search
         console.log(searchParam);
         dispatch(actionFilterAsync(searchParam));
-    }
-    
-    // useEffect(() =>{
-    //     dispatch(actionFilterAsync())
-    // }, [dispatch])
+    }  
 
     const renderFood = ({target}) => {
         if (target.value.trim() === '') {
@@ -49,7 +49,7 @@ const Search = () => {
                 <section className='search__food'>
                     {food && food.length ? (
                         food.map((food, index) =>(
-                            <div key={index}>
+                            <div key={index} onClick={() => { navigate(`/product/${food.name}`) }}>
                                 <img src={food.image} alt="food" />
                                 <span>{food.name}</span>
                                 <span>price: {food.price}</span>

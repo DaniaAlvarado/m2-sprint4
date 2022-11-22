@@ -9,8 +9,11 @@ import icon6 from '../img/Svg (10).png';
 import icon7 from '../img/Svg (11).png';
 import Footer from '../footer/Footer'
 import './prof.scss';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
+
+    const { user } = useSelector((store) => store.user);
     return (
         <div className='profile'>
             <div className='profile__options'>

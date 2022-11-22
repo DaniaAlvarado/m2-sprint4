@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect  } from 'react'
 import svg from '../img/Svg.png';
 import promo from '../img/Promo 1.png';
 import promo2 from '../img/Promo 2 (1).png';
-import promo3 from '../img/sopas-gourmet.jpg';
+//import promo3 from '../img/sopas-gourmet.jpg';
 import food from '../img/image 4.png';
 //import restaurant2 from '../img/foodImg.jpg';
 //import restaurant from '../img/Mask group.png';   import Carousel from "react-bootstrap/Carousel";
@@ -12,7 +12,7 @@ import Footer from '../footer/Footer';
 //import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionLogoutAsync } from '../../redux/actions/userAction';
-import { actionFilterRestaurantAsync, actionGetRestaurantAsync } from '../../redux/actions/restaurantAction';
+import { actionFilterRestaurantAsync, actionGetFoodAsync, actionGetRestaurantAsync } from '../../redux/actions/restaurantAction';
 import { category } from '../../services/data';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,6 +30,7 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(actionGetRestaurantAsync());
+        dispatch(actionGetFoodAsync());
     }, [dispatch])
 
     const onFiltered = (searchValue) => {
@@ -66,7 +67,7 @@ const Home = () => {
             <article className='restaurant'>
                 {restaurant && restaurant.length ? (
                     restaurant.map((restaurant, index) => (
-                        <aside key={index} onClick={() => { navigate(`/restaurant/${restaurant.id}`) }}>
+                        <aside key={index} onClick={() => { navigate(`/restaurant/${restaurant.name}`) }}>
                             <figure className='image'>
                                 <img src={restaurant.image} alt="restaurant" />
                             </figure>
