@@ -10,8 +10,10 @@ import icon7 from '../img/Svg (11).png';
 import Footer from '../footer/Footer'
 import './prof.scss';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+    const navigate = useNavigate();
 
     const { user } = useSelector((store) => store.user);
     return (
@@ -30,6 +32,7 @@ const Profile = () => {
                     <button><img src={icon6} alt="p" />FAQ</button>
                     <button><img src={icon7} alt="p" />Support</button>
                 </section>
+                <button onClick={() => { navigate('/addRestaurant') }}>Add Restaurant</button>
             </div>
             <Footer />
         </div>

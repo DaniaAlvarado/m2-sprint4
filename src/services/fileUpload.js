@@ -1,6 +1,6 @@
 export const fileUpLoad = async (file) => {
-    const cloudName = "dspyfujx0";
-    const uploadPreset = "test-cloudinary";
+    const cloudName = "dpl9jrgwn";
+    const uploadPreset = "crud-completo";
   
     const urlCloudinary = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
   

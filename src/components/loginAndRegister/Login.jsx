@@ -40,7 +40,7 @@ const Login = () => {
     if (error) {
       Swal.fire("Oops!", `Ha ocurrido un error: ${errorMessage}`, "error");
     } else {
-      Swal.fire("Good job!", "Tu cuenta se ha creado exitosamente!", "success");
+      Swal.fire("Good job!", "Bienvenido", "success");
     }
   };
 

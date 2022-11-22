@@ -28,3 +28,55 @@ export const loginProvider = [
       value: 3,
     }
   ];
+
+  export const categoryFood = [
+    {
+      label: "Hot dog",
+      value: 1,
+    },
+    {
+      label: "Pizza",
+      value: 2,
+    },
+    {
+      label: "Cafe",
+      value: 3,
+    },
+    {
+      label: "Salad",
+      value: 4,
+    }
+  ];
+
+  export const inputList = [
+    {
+      label: "Nombre",
+      type: "text",
+      name: "name",
+    },
+    {
+      label: "Categoría",
+      type: "select",
+      name: "category",
+    },
+    {
+      label: "Descripción",
+      type: "textarea",
+      name: "description",
+    },
+    {
+      label: "Before",
+      type: "textarea",
+      name: "before",
+    },
+    {
+      label: "Time",
+      type: "textarea",
+      name: "time",
+    },
+    {
+      label: "Imagen",
+      type: "file",
+      name: "image",
+    },
+  ];

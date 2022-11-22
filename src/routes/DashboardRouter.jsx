@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import AddRest from "../components/addRest/AddRest";
 import Home from "../components/home/Home";
 import Current from "../components/newOrder/Current";
 import NewOrder from "../components/newOrder/NewOrder";
@@ -22,6 +23,7 @@ const DashboardRouter = () => {
             <Route path='/product/:name' element={<Product />} />
             <Route path='/newOrder/:name' element={<NewOrder />} />
             <Route path='/current/:name' element={<Current />} />
+            <Route path="/addRestaurant" element={<AddRest/>}/>
         </Routes>
     );
 };

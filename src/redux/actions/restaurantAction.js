@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore"
 import {database} from '../../firebase/firebaseConfi';
 import { foodTypes, restaurantTypes } from "../types/restaurantTypes";
 
@@ -34,33 +34,6 @@ const actionGetRestaurantSync = (restaurant) => {
     }
 }
 
-// export const getSingleRestaurantAsync = (restaurantId) => {
-//     return (dispatch) => {
-//         const docRef = doc(database, collectionName, restaurantId)
-//         getDoc(docRef)
-//             .then(docSnapshot => {
-//                 if (docSnapshot.exists()) {
-//                     dispatch(getSingleRestaurantSync(docSnapshot.data()))
-//                 } else {
-//                     console.log("No such restaurant!");
-//                 }
-//             })
-//             .catch(error => {
-//                 console.log(error);
-//                 dispatch(getSingleRestaurantSync({}))
-//             })
-//     }
-
-// }
-
-// export const getSingleRestaurantSync = (restaurant) => {
-//     return {
-//         type: restaurantTypes.RESTAURANT_SINGLE_GET,
-//         payload: {
-//             restaurant,
-//         }
-//     }
-// }
  
 export const actionFilterRestaurantAsync = (searchParam, searchValue) => {
     return async (dispatch) => {
@@ -156,6 +129,36 @@ export const actionFilterAsync = (searchParam) => {
     };
 };
 
+export const actionFilterFoodAsync = (searchParam, searchValue) => {
+    return async (dispatch) => {
+        const foodCollection = collection(database, collectionFood)
+        const f = query(foodCollection, where(searchParam, "==", searchValue));
+        const food = [];
+        try {
+            const querySnapshot= await getDocs(f);
+            querySnapshot.forEach((doc) => {
+                food.push({
+                id: doc.id,
+                ...doc.data(),
+                });
+            });
+        } catch (error) {
+            console.log(error);
+        } finally {
+            dispatch(actionButtonFoodSync(food))
+        }
+    }
+}
+
+const actionButtonFoodSync = (food) => {
+    return {
+        type: foodTypes.FOOD_BUTTON,
+        payload: {
+            food: food
+        }
+    };
+};
+
 export const actionAddRestaurantAsync = (restaurant) => {
     return async (dispatch) => {
       try {
@@ -175,3 +178,26 @@ export const actionAddRestaurantAsync = (restaurant) => {
       payload: restaurant,
     };
   };
+
+  export const actionDeleteRestAsync =(restaurant) => {
+    return  async (dispatch) => {
+        const restaurantRef = doc(database, collectionName, restaurant.id)
+        try {
+            await deleteDoc(restaurantRef);
+            dispatch(actionDeleteRestSync(restaurant))
+        } catch (error) {
+            console.log(error);
+            dispatch(actionDeleteRestSync({
+                error: true,
+                errorMessage: error.message
+            }))
+        }        
+    }
+}
+
+const actionDeleteRestSync = (restaurant) => {
+    return {
+        type: restaurantTypes.RESTAURANT_DELETE,
+        payload: {id: restaurant.id}
+    }
+}

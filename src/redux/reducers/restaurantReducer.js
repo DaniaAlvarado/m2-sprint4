@@ -11,11 +11,6 @@ export const restautantReducer = (state = restaurantState, action) => {
                 ...state,
                 restaurant: action.payload.restaurant
             };
-        case restaurantTypes.RESTAURANT_SINGLE_GET:
-            return { 
-                ...state, 
-                restaurant: action.payload.restaurant 
-            }
         case restaurantTypes.RESTAURANT_FILTERED:
             return {
                 ...state,
@@ -26,6 +21,13 @@ export const restautantReducer = (state = restaurantState, action) => {
                 ...state,
                 restaurant: [...state.restaurant, action.payload],
             };
+        case restaurantTypes.RESTAURANT_DELETE:
+            return{
+                ...state,
+                restaurant: state.restaurant.filter((rest) => 
+                    rest.id !== action.payload.id
+                ) 
+            }
         default:
             return state;
     };
@@ -47,7 +49,11 @@ export const foodReducer = (state= foodState, action) => {
                 ...state,
                 food: action.payload.food
             };
-    
+        case foodTypes.FOOD_BUTTON:
+            return{
+                ...state,
+                food: action.payload.food
+            }
         default:
             return state ;
     }

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import img from '../img/Mask group (1).png';
-//import restaurant from '../img/Mask group.png';
-//import restaurant2 from '../img/foodImg.jpg';
 import star from '../img/Star 4.png';
-//import food from '../img/Mask group (2).png';
 import './rAndP.scss'
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionFilterFoodAsync, actionGetFoodAsync } from '../../redux/actions/restaurantAction';
+import { categoryFood } from '../../services/data';
 
 const Restaurant = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const { name } = useParams();
     //console.log(name);
@@ -36,6 +36,11 @@ const Restaurant = () => {
     //setFoodInfo(foodFiltered);
     //console.log(foodFiltered)
 
+    const onFiltered = (searchValue) => {
+        const searchParam = "category";
+        dispatch(actionFilterFoodAsync(searchParam, searchValue));
+    };
+
     return (
         <>
             {
@@ -58,9 +63,11 @@ const Restaurant = () => {
                             </nav>
                         </article>
                         <aside className='restaurant__buttons'>
-                            <button>All</button>
-                            <button>Salates</button>
-                            <button>Pizza</button>
+                            <button onClick={() => { dispatch(actionGetFoodAsync()) }}>All</button>
+                            {categoryFood.map((item) => (
+                                <button key={item.value} onClick={() => { onFiltered(item.label); }}>{item.label}</button>
+                            ))
+                            }
                         </aside>
                         <section className='restaurant__menu'>
                             {

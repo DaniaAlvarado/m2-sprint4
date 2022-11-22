@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import svg from '../img/Svg.png';
-//import food from '../img/Mask group (2).png';
 import './new.scss';
 
 const NewOrder = () => {

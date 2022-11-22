@@ -1,6 +1,5 @@
 import React, { useEffect} from 'react';
 import search from '../img/Svg (2).png';
-import back from '../img/Group 48.png';
 import Footer from '../footer/Footer';
 import './sAndO.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,11 +40,6 @@ const Search = () => {
                     {...register('search', {required:true})} onChange={renderFood}/>
                     </form>
                 </nav>
-                <aside className='search__historial'>
-                    <span>Recent searches</span>
-                    <div><img src={back} alt="back" />Pizza</div>
-                    <div><img src={back} alt="back" />Pizza</div>
-                </aside>
                 <section className='search__food'>
                     {food && food.length ? (
                         food.map((food, index) =>(
