@@ -15,6 +15,14 @@
             color: #FFE031;
         }
     }
+    .Carousel{
+        width: 100%;
+        display: flex;
+        img{
+            width: 100px;
+            height: 40vh;
+        }
+    }
     section{
         display: flex;
         gap: 20px;
