@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import profile from '../img/Profile img.png';
 import icon from '../img/Svg (5).png';
 import icon2 from '../img/Svg (6).png';
@@ -15,16 +15,29 @@ import { useNavigate } from 'react-router-dom';
 const Profile = () => {
     const navigate = useNavigate();
 
-    const { user } = useSelector((store) => store.user);
+    useEffect(() => {
+        userAdmin();
+    }, [])
+
+    const [admin, setAdmin] = useState(true)
+    const user = useSelector((store) => store.userStore);
+
+    const userAdmin = () => {
+        if (user.email === 'dania26alvarado@gmail.com') {
+            setAdmin(false)
+        } 
+    }
+
+
     return (
         <div className='profile'>
             <div className='profile__options'>
                 <aside>
-                    <img src={profile} alt="profile" />
-                    <span>nombre</span>
+                    <img src={user.avatar} alt="profile" />
+                    <span>{user.name}</span>
                 </aside>
                 <section>
-                    <button><img src={icon} alt="p" />Account edit</button>
+                    <button  onClick={() => { navigate('/edit') }}><img src={icon} alt="p" />Account</button>
                     <button><img src={icon2} alt="p" />Account edit</button>
                     <button><img src={icon3} alt="p" />Payment</button>
                     <button><img src={icon4} alt="p" />Language</button>
@@ -32,7 +45,8 @@ const Profile = () => {
                     <button><img src={icon6} alt="p" />FAQ</button>
                     <button><img src={icon7} alt="p" />Support</button>
                 </section>
-                <button onClick={() => { navigate('/addRestaurant') }}>Add Restaurant</button>
+                <button onClick={() => { navigate('/addRestaurant') }} disabled={admin}>Add Restaurant</button>
+                <button onClick={() => { navigate('/addFood') }} disabled={admin}>Add Food</button>
             </div>
             <Footer />
         </div>

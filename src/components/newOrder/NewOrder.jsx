@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import svg from '../img/Svg.png';
 import './new.scss';
+import { useForm } from 'react-hook-form';
+import { actionAddOrderAsync } from '../../redux/actions/orderAction';
 
 const NewOrder = () => {
     const navigate = useNavigate();
     const { name } = useParams();
+    const dispatch = useDispatch();
     //console.log(name);
 
     useEffect(() => {
@@ -15,7 +18,8 @@ const NewOrder = () => {
 
     const [infoFood, setInfoFood] = useState()
 
-    const specific = useSelector((store) => store.foodStore)
+    const specific = useSelector((store) => store.foodStore);
+    const user = useSelector((store) => store.userStore);
     //console.log(infoFood)
 
     const getFoodInfo = () => {
@@ -35,6 +39,29 @@ const NewOrder = () => {
             const decremento = cantidadFood - 1;
             setCantidadFood(decremento);
         }
+    };
+
+    const {
+        handleSubmit,
+    } = useForm();
+
+    const onSubmit = async () => {
+        const newOrder = {
+            user: user.email,
+            name: infoFood.name,
+            id: infoFood.id,
+            image: infoFood.image,
+            quantity: cantidadFood,
+            price: cantidadFood * infoFood.price,
+        };
+        console.log(newOrder);
+        dispatch(actionAddOrderAsync(newOrder));
+        // Swal.fire(
+        //     "Se ha agregado la comida",
+        //     "success"
+        //   )      
+        // navigate("/home");
+
     };
 
     return (
@@ -59,43 +86,46 @@ const NewOrder = () => {
                                 <button value='PayPal'>PayPal</button>
                             </aside>
                         </section>
+
                         <article className='new__buy'>
                             <aside className='new__order'>
                                 <img src={infoFood.image} alt="food" />
                                 <nav className='counter'>
                                     <button disabled={cantidadFood <= 1}
-                                    onClick={() => {
-                                        handleClick("minus");
-                                    }}>-</button>
+                                        onClick={() => {
+                                            handleClick("minus");
+                                        }}>-</button>
                                     <span>{cantidadFood}</span>
                                     <button onClick={() => {
-                                    handleClick("plus");
-                                }}>+</button>
+                                        handleClick("plus");
+                                    }}>+</button>
                                 </nav>
                                 <span>{infoFood.name}</span>
                                 <div>{cantidadFood * infoFood.price}</div>
                             </aside>
                         </article>
-                        <div className='new__note'>
-                            <span>Note</span>
-                            <input type="text" placeholder='Write something' />
-                        </div>
-                        <aside className='new__quantity'>
-                            <nav>
-                                <span>Products</span>
-                                <div>{cantidadFood * infoFood.price}</div>
-                            </nav>
-                            <nav>
-                                <span>Delivery</span>
-                                <div>0$</div>
-                            </nav>
-                            <hr />
-                            <nav>
-                                <span>Total</span>
-                                <div>{cantidadFood * infoFood.price}</div>
-                            </nav>
-                            <button onClick={() => { navigate(`/current/${infoFood.name}`) }}>Order</button>
-                        </aside>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <div className='new__note'>
+                                <span>Note</span>
+                                <input type="text" placeholder='Write something' />
+                            </div>
+                            <aside className='new__quantity'>
+                                <nav>
+                                    <span>Products</span>
+                                    <div>{cantidadFood * infoFood.price}</div>
+                                </nav>
+                                <nav>
+                                    <span>Delivery</span>
+                                    <div>0$</div>
+                                </nav>
+                                <hr />
+                                <nav>
+                                    <span>Total</span>
+                                    <div>{cantidadFood * infoFood.price}</div>
+                                </nav>
+                                <button type='submit'>Order</button>
+                            </aside>
+                        </form>
                     </div>
                 ) : (
                     <div>no hay plato seleccionado</div>

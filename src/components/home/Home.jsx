@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import svg from '../img/Svg.png';
 import promo from '../img/Promo 1.png';
 import promo2 from '../img/Promo 2 (1).png';
@@ -19,17 +19,27 @@ const Home = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [admin, setAdmin] = useState(true)
+    const user = useSelector((store) => store.userStore);
+
+    const userAdmin = () => {
+        if (user.email === 'dania26alvarado@gmail.com') {
+            setAdmin(false)
+        } 
+    }
+
+    useEffect(() => {
+        dispatch(actionGetRestaurantAsync());
+        dispatch(actionGetFoodAsync());
+        userAdmin();
+    }, [dispatch])
+
     //const { photoURL } = useSelector(store => store.user)
     const onCloseSession = () => {
         dispatch(actionLogoutAsync());
     };
 
     const { restaurant } = useSelector(store => store.restaurantStore);
-
-    useEffect(() => {
-        dispatch(actionGetRestaurantAsync());
-        dispatch(actionGetFoodAsync());
-    }, [dispatch])
 
     const onFiltered = (searchValue) => {
         const searchParam = "category";
@@ -104,7 +114,7 @@ const Home = () => {
                             </nav>
                             <button className='delete' onClick={() => {
                                 dispatch(actionDeleteRestAsync(restaurant))
-                            }}>X</button>
+                            }}  disabled={admin}>X</button>
                         </aside>
                     ))
                 ) : (

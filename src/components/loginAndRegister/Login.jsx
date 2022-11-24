@@ -31,7 +31,7 @@ const Login = () => {
       password: "",
     },
   });
-  const { error, errorMessage } = useSelector((store) => store.user);
+  const { error, errorMessage } = useSelector((store) => store.userStore);
 
   const dispatch = useDispatch();
 

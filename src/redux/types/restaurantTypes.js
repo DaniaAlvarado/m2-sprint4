@@ -8,5 +8,6 @@ export const restaurantTypes = {
 export const foodTypes = {
     FOOD_GET: 'FOOD_GET',
     FOOD_FILTERED: 'FOOD_FILTERED',
-    FOOD_BUTTON: 'FOOD_BUTTON'
+    FOOD_BUTTON: 'FOOD_BUTTON',
+    FOOD_ADD: 'FOOD_ADD',
 }

@@ -54,6 +54,11 @@ export const foodReducer = (state= foodState, action) => {
                 ...state,
                 food: action.payload.food
             }
+        case foodTypes.FOOD_ADD:
+            return {
+                ...state,
+                food: [...state.food, action.payload],
+            };
         default:
             return state ;
     }

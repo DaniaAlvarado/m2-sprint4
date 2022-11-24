@@ -11,11 +11,10 @@ import PrivateRouter from './PrivateRouter';
 import PublicRouter from './PublicRouter';
 
 const Router = () => {
-
-  const [cheking, setCheking] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(undefined);
+  const [cheking, setCheking] = useState(true);
 
-  const userStore = useSelector((store) => store.user);
+  const userStore = useSelector((store) => store.userStore);
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -62,7 +61,7 @@ const Router = () => {
        <Route path="/" element={<Login />} />
     </Route>
      <Route element={<PrivateRouter isAutentication={isLoggedIn} />}>
-       <Route path="/*" element={<DashboardRouter />} />
+       <Route path="/*" element={<DashboardRouter isAutentication={isLoggedIn}/>} />
      </Route>
     </Routes>
   </BrowserRouter>

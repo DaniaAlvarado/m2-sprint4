@@ -80,3 +80,36 @@ export const loginProvider = [
       name: "image",
     },
   ];
+
+  export const inputListFood = [
+    {
+      label: "Nombre",
+      type: "textarea",
+      name: "name",
+    },
+    {
+      label: "Id",
+      type: "textarea",
+      name: "id",
+    },
+    {
+      label: "Categoría",
+      type: "select",
+      name: "category",
+    },
+    {
+      label: "Descripción",
+      type: "textarea",
+      name: "description",
+    },
+    {
+      label: "Price",
+      type: "number",
+      name: "price",
+    },
+    {
+      label: "Imagen",
+      type: "file",
+      name: "image",
+    },
+  ];
