@@ -5,6 +5,7 @@ import svg from '../img/Svg.png';
 import './new.scss';
 import { useForm } from 'react-hook-form';
 import { actionAddOrderAsync } from '../../redux/actions/orderAction';
+import Swal from "sweetalert2";
 
 const NewOrder = () => {
     const navigate = useNavigate();
@@ -56,11 +57,11 @@ const NewOrder = () => {
         };
         console.log(newOrder);
         dispatch(actionAddOrderAsync(newOrder));
-        // Swal.fire(
-        //     "Se ha agregado la comida",
-        //     "success"
-        //   )      
-        // navigate("/home");
+        Swal.fire(
+            "Se ha realizado la compra",
+            "success"
+          )      
+        navigate("/orders");
 
     };
 
