@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionGetOrderAsync } from '../../redux/actions/orderAction';
 import Footer from '../footer/Footer';
 import img from '../img/Mask group (1).png';
 import './sAndO.scss';
 
 const Orders = () => {
+    const dispatch = useDispatch();
 
-    const { userOrder } = useSelector((store) => store.orderStore)
-    const user = useSelector((store) => store.userStore);
+    const  {order}  = useSelector((store) => store.orderStore)
+    //const user = useSelector((store) => store.userStore);
 
-    console.log(userOrder)
+    useEffect(() => {
+        dispatch(actionGetOrderAsync());
+    }, [dispatch])
+
+    console.log(order)
 
     // useEffect(() => {
     //     getOrderInfo()
@@ -39,24 +45,24 @@ const Orders = () => {
             <div className='orders__historial'>
                 <span className='orders__title'>All orders</span>
                 <article className='orders__restaurat'>
-                    {/* {
-                        // infoOrder && infoOrder.length ? (
-                        //     infoOrder.map((order, index) => (
-                        //         <aside key={index}>
-                        //             <div>
-                        //                 <img src={order.image} alt="img" />
-                        //                 <nav>
-                        //                     <div>{order.name}</div>
-                        //                     <div>{order.price}</div>
-                        //                 </nav>
-                        //             </div>
-                        //             <span>Delivered</span>
-                        //         </aside>
-                        //     ))
+                    {
+                        order && order.length ? (
+                            order.map((order, index) => (
+                                <aside key={index}>
+                                    <div>
+                                        <img src={order.image} alt="img" />
+                                        <nav>
+                                            <div>{order.name}</div>
+                                            <div>{order.price}</div>
+                                        </nav>
+                                    </div>
+                                    <span>Delivered</span>
+                                </aside>
+                            ))
                         ) : (
                             <div>no hay ordenes</div>
                         )
-                    } */}
+                    }
                 </article>
             </div>
             <Footer />

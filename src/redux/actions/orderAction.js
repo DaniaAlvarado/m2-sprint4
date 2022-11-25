@@ -4,27 +4,7 @@ import { orderTypes } from "../types/orderTypes";
 
 const collectionOrder = 'order';
 
-export const actionAddOrderAsync = (order) => {
-    return async (dispatch) => {
-      try {
-        const orderCollection = collection(database, collectionOrder);
-        const docs = await addDoc(orderCollection, order);
-        dispatch(actionAddOrderSync({ id: docs.id, ...order }));
-      } catch (error) {
-        console.log(error);
-        dispatch(actionAddOrderSync({}));
-      }
-    };
-  };
-  
-  const actionAddOrderSync = (order) => {
-    return {
-      type: orderTypes.ORDER_ADD,
-      payload: order,
-    };
-  };
-
-  export const actionGetOrderAsync = () => {
+export const actionGetOrderAsync = () => {
     return async (dispatch) => {
         const orderCollection = collection(database, collectionOrder);
         const querySnapshot = await getDocs(orderCollection);
@@ -52,3 +32,23 @@ const actionGetOrderSync = (order) => {
         }
     }
 }
+
+export const actionAddOrderAsync = (order) => {
+    return async (dispatch) => {
+      try {
+        const orderCollection = collection(database, collectionOrder);
+        const docs = await addDoc(orderCollection, order);
+        dispatch(actionAddOrderSync({ id: docs.id, ...order }));
+      } catch (error) {
+        console.log(error);
+        dispatch(actionAddOrderSync({}));
+      }
+    };
+  };
+  
+  const actionAddOrderSync = (order) => {
+    return {
+      type: orderTypes.ORDER_ADD,
+      payload: order,
+    };
+  };
